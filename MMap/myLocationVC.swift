@@ -16,27 +16,29 @@ class myLocationVC: UIViewController,CLLocationManagerDelegate ,MKMapViewDelegat
     var locationManager = CLLocationManager()
     var locCordinate = CLLocationCoordinate2D()
    
-    
+    var locationStatus = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
-        
+        mapView.delegate = self
         
         if (CLLocationManager.locationServicesEnabled())
         {
+            
+            locationManager = CLLocationManager()
             locationManager.delegate = self
             
-            if CLLocationManager.authorizationStatus() == .notDetermined {
-                self.locationManager.requestWhenInUseAuthorization()
-            }
+            //if CLLocationManager.authorizationStatus() == .notDetermined {
+              //  self.locationManager.requestWhenInUseAuthorization()
+           // }
             
             locationManager.distanceFilter = kCLDistanceFilterNone
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
-            
+            locationManager.startMonitoringSignificantLocationChanges()
         }
         else
         {
@@ -68,16 +70,16 @@ class myLocationVC: UIViewController,CLLocationManagerDelegate ,MKMapViewDelegat
     
     
     
-    private func locationManager(manager: CLLocationManager!, didFailWithError error: Error!)
+     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error)
     {
-        locationManager.stopUpdatingLocation()
+        //locationManager.stopUpdatingLocation()
         if ((error) != nil)
         {
             print(error)
         }
     }
     
-    private func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
+      func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!)
     {
         let locationArray = locations as NSArray
         let locationObj = locationArray.lastObject as! CLLocation
@@ -101,7 +103,53 @@ class myLocationVC: UIViewController,CLLocationManagerDelegate ,MKMapViewDelegat
 
     }
     
+//    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+//        
+//        var locValue:CLLocationCoordinate2D = manager.location!.coordinate
+//        
+//        println("locations = \(locValue.latitude) \(locValue.longitude)")
+//        
+//    }
     
+    
+    private func locationManager(manager: CLLocationManager!,
+                         didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        var shouldIAllow = false
+        
+        switch status {
+        case CLAuthorizationStatus.restricted:
+            locationStatus = "Restricted Access to location"
+        case CLAuthorizationStatus.denied:
+            locationStatus = "User denied access to location"
+        case CLAuthorizationStatus.notDetermined:
+            locationStatus = "Status not determined"
+        default:
+            locationStatus = "Allowed to location Access"
+            shouldIAllow = true
+        }
+      //  NotificationCenter.defaultCenter().postNotificationName("LabelHasbeenUpdated", object: nil)
+        if (shouldIAllow == true) {
+            NSLog("Location to Allowed")
+            // Start location services
+            locationManager.startUpdatingLocation()
+        } else {
+            NSLog("Denied access: \(locationStatus)")
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func openLocation(_ sender: AnyObject) {
+        
+        
+        locationManager.startUpdatingLocation()
+        
+        
+    }
     
     
 }

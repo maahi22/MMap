@@ -169,7 +169,13 @@
                             <constraint firstItem="DZX-n1-By4" firstAttribute="top" secondItem="cf9-5M-zS6" secondAttribute="bottom" constant="8" id="usf-Si-iFn"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="My Location" id="pBl-Se-04w"/>
+                    <navigationItem key="navigationItem" title="My Location" id="pBl-Se-04w">
+                        <barButtonItem key="rightBarButtonItem" title="loc" id="5S5-ju-WEt">
+                            <connections>
+                                <action selector="openLocation:" destination="WoJ-T2-N15" id="aD0-a4-YqA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="DZX-n1-By4" id="UeK-mr-8oG"/>
                     </connections>

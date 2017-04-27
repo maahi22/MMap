@@ -75,7 +75,7 @@ class MultipleUserVC: UIViewController,MKMapViewDelegate {
             mapView.centerCoordinate = point2.coordinate
             mapView.delegate = self
             
-            let region = MKCoordinateRegion(center: point5.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.12, longitudeDelta: 0.12))
+            let region = MKCoordinateRegion(center: point5.coordinate, span: MKCoordinateSpan(latitudeDelta: 22.12, longitudeDelta: 22.12))
            // span.latitudeDelta = 0.015;
            // span.longitudeDelta = 0.015;
             mapView.setRegion(region, animated: true)
