@@ -20,6 +20,7 @@
 		0F0437E21EB1F074004FC48C /* MultipleUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0437E11EB1F074004FC48C /* MultipleUserVC.swift */; };
 		0F0437E41EB1F083004FC48C /* OtherVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0437E31EB1F083004FC48C /* OtherVC.swift */; };
 		0F0437E71EB27703004FC48C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F0437E61EB27703004FC48C /* MapKit.framework */; };
+		0FE003381ED7FB6100F22D54 /* AmoatPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE003371ED7FB6100F22D54 /* AmoatPoint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		0F0437E11EB1F074004FC48C /* MultipleUserVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleUserVC.swift; sourceTree = "<group>"; };
 		0F0437E31EB1F083004FC48C /* OtherVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OtherVC.swift; sourceTree = "<group>"; };
 		0F0437E61EB27703004FC48C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		0FE003371ED7FB6100F22D54 /* AmoatPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AmoatPoint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				0F0437DF1EB1F057004FC48C /* RouteVC.swift */,
 				0F0437E11EB1F074004FC48C /* MultipleUserVC.swift */,
 				0F0437E31EB1F083004FC48C /* OtherVC.swift */,
+				0FE003371ED7FB6100F22D54 /* AmoatPoint.swift */,
 			);
 			path = MMap;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 				0F0437AE1EB1EE77004FC48C /* ViewController.swift in Sources */,
 				0F0437AC1EB1EE77004FC48C /* AppDelegate.swift in Sources */,
 				0F0437E21EB1F074004FC48C /* MultipleUserVC.swift in Sources */,
+				0FE003381ED7FB6100F22D54 /* AmoatPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

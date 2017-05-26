@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 
+
 class MultipleUserVC: UIViewController,MKMapViewDelegate {
 
     let latlongArray = NSMutableArray()
@@ -23,7 +24,43 @@ class MultipleUserVC: UIViewController,MKMapViewDelegate {
         let point1 = MKPointAnnotation()
         let point2 = MKPointAnnotation()
         
-        point1.coordinate = CLLocationCoordinate2DMake(28.7041, 77.1025)
+        
+        
+        
+        
+        
+        var annotation = AmoatPoint(latitude: 28.7041, longitude: 77.1025)
+        annotation.title = "Delhi"
+        latlongArray.add(annotation)
+        
+        
+        let region = MKCoordinateRegion(center: (annotation as MKAnnotation).coordinate, span: MKCoordinateSpan(latitudeDelta: 22.12, longitudeDelta: 22.12))
+        
+        
+        
+        
+        annotation = AmoatPoint(latitude: 19.0760, longitude: 72.8777)
+        annotation.title = "mumbai"
+        latlongArray.add(annotation)
+        
+         annotation = AmoatPoint(latitude: 28.9931, longitude: 77.01515)
+        annotation.title = "sonipat"
+        latlongArray.add(annotation)
+        
+         annotation = AmoatPoint(latitude: 31.1048, longitude: 77.1734)
+        annotation.title = "shimla"
+        latlongArray.add(annotation)
+        
+         annotation = AmoatPoint(latitude: 29.9457, longitude: 78.1642)
+        annotation.title = "haridwar"
+        latlongArray.add(annotation)
+        
+         annotation = AmoatPoint(latitude: 28.4595, longitude: 77.0266)
+        annotation.title = "gurgaon"
+        latlongArray.add(annotation)
+        
+        
+       /* point1.coordinate = CLLocationCoordinate2DMake(28.7041, 77.1025)
         point1.title = "Delhi"
         point1.subtitle = "Delhi"
         latlongArray.add(point1)
@@ -69,19 +106,102 @@ class MultipleUserVC: UIViewController,MKMapViewDelegate {
         point8.subtitle = "chatar pur"
         latlongArray.add(point8)
         
+        */
+        var a = 0
         
         for anotation in latlongArray {
             mapView.addAnnotation(anotation as! MKAnnotation)
             mapView.centerCoordinate = point2.coordinate
             mapView.delegate = self
             
-            let region = MKCoordinateRegion(center: point5.coordinate, span: MKCoordinateSpan(latitudeDelta: 22.12, longitudeDelta: 22.12))
+            
+           /* if(a==0) {
+            
+                let region = MKCoordinateRegion(center: (anotation as! MKAnnotation).coordinate, span: MKCoordinateSpan(latitudeDelta: 22.12, longitudeDelta: 22.12))
+                 mapView.setRegion(region, animated: true)
+                
+                a = a+1
+            }*/
+            
            // span.latitudeDelta = 0.015;
            // span.longitudeDelta = 0.015;
-            mapView.setRegion(region, animated: true)
+           
+            
+            
+            
+        
         }
+        //mapView.setRegion(region, animated: true)
+        
+        
+        
+        
+        mapView.delegate = self
+        // Connect all the mappoints using Poly line.
+        var points: [CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
+        for annotation in latlongArray {
+            points.append((annotation as AnyObject).coordinate)
+        }
+        
+        let polyline = MKPolyline(coordinates: &points, count: points.count)
+        mapView.add(polyline)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        var zoomRect: MKMapRect = MKMapRectNull
+        for annotation in mapView.annotations {
+            let annotationPoint = MKMapPointForCoordinate(annotation.coordinate)
+            let pointRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 2.01, 2.01)
+            zoomRect = MKMapRectUnion(zoomRect, pointRect)
+        }
+        mapView.setVisibleMapRect(zoomRect, animated: true)
+        
+        
+        
+        
+        
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //MARK:- MapViewDelegate methods
+    
+     func mapView(_ mapView: MKMapView,
+                          rendererFor overlay: MKOverlay) -> MKOverlayRenderer
+
+    {
+        
+        if overlay is MKPolyline {
+            let polylineRenderer = MKPolylineRenderer(overlay: overlay)
+            polylineRenderer.strokeColor = UIColor.blue
+            polylineRenderer.lineWidth = 5
+            return polylineRenderer
+        }
+            
+           return MKPolylineRenderer ()
+        
+        
+    }
+    
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -97,8 +217,8 @@ class MultipleUserVC: UIViewController,MKMapViewDelegate {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
+    
+    }
 
 //extension MultipleUserVC : MKMapViewDelegate{
 //    
