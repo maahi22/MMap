@@ -8,10 +8,13 @@
 
 import UIKit
 import MapKit
+import CoreLocation
+
+
 
 //http://studyswift.blogspot.in/2014/10/mkdirections-draw-route-from-location.html
 
-class RouteVC: UIViewController,MKMapViewDelegate {
+class RouteVC: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -22,12 +25,26 @@ class RouteVC: UIViewController,MKMapViewDelegate {
     var myRoute : MKRoute!
     
     let routeArray = NSMutableArray()
-    
+    var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        
+        
+        locationManager.delegate = self
+        
+        if CLLocationManager.authorizationStatus() == .notDetermined {
+            self.locationManager.requestWhenInUseAuthorization()
+        }
+        
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,6 +53,20 @@ class RouteVC: UIViewController,MKMapViewDelegate {
     }
     
 
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let userLocation:CLLocation = locations[0]
+        let long = userLocation.coordinate.longitude;
+        let lat = userLocation.coordinate.latitude;
+        
+        print(long, lat)
+        
+        //Do What ever you want with it
+    }
+    
+    
+    
     /*
     // MARK: - Navigation
 
